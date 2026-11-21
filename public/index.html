@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pires Photography — Galeria de Jogos</title>
+  <title>ACA — Galeria Oficial | Pires Photography</title>
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#0f1115">
+  <meta name="theme-color" content="#08120c">
   <link rel="apple-touch-icon" href="/logo.png">
   <style>
     :root {
-      --bg: #0f1115;
-      --card: #181b22;
-      --card-hover: #1f242d;
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
-      --border: #262a34;
+      --bg: #08120c;
+      --card: #0f2116;
+      --card-hover: #152e1f;
+      --text: #f8fafc;
+      --muted: #9eb5a6;
+      --yellow: #eab308;
+      --yellow-hover: #facc15;
+      --green: #16a34a;
+      --border: #1d3b28;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); line-height: 1.5; }
@@ -27,38 +28,45 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 14px 0; margin-bottom: 24px; border-bottom: 1px solid var(--border);
     }
-    .brand { display: flex; align-items: center; cursor: pointer; }
-    .brand img { height: 48px; width: auto; object-fit: contain; }
+    .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .brand img { height: 46px; width: auto; object-fit: contain; }
+    .club-badge {
+      background: rgba(234, 179, 8, 0.15); color: var(--yellow);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+    }
     .nav-links a {
       color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 0.95rem; transition: color 0.15s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: var(--yellow); }
 
     /* Secção de Introdução (Hero) */
     .hero {
-      background: linear-gradient(145deg, #181b22 0%, #111318 100%);
-      border: 1px solid var(--border); border-radius: 14px;
-      padding: 40px 28px; margin-bottom: 36px; text-align: center;
+      background: linear-gradient(145deg, #102619 0%, #09150e 100%);
+      border: 1px solid var(--border); border-top: 3px solid var(--yellow);
+      border-radius: 14px; padding: 40px 28px; margin-bottom: 36px; text-align: center;
     }
-    .hero-logo { max-width: 240px; height: auto; margin: 0 auto 20px auto; display: block; }
+    .hero-logo { max-width: 220px; height: auto; margin: 0 auto 18px auto; display: block; }
     .hero h1 { font-size: 1.85rem; margin-bottom: 12px; letter-spacing: -0.5px; }
+    .hero h1 span { color: var(--yellow); }
     .hero p { color: var(--muted); max-width: 620px; margin: 0 auto 24px auto; font-size: 1.05rem; }
     .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
     /* Botões */
     .btn {
-      background: var(--accent); color: #fff; padding: 10px 18px; border-radius: 8px;
-      text-decoration: none; border: none; cursor: pointer; font-size: 0.92rem; font-weight: 500;
-      display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s;
+      background: var(--yellow); color: #08120c; padding: 10px 18px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer; font-size: 0.92rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s, transform 0.1s;
     }
-    .btn:hover { background: var(--accent-hover); }
-    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
-    .btn-outline:hover { background: var(--card-hover); }
-    .btn-back { background: var(--border); margin-bottom: 18px; }
+    .btn:hover { background: var(--yellow-hover); transform: translateY(-1px); }
+    .btn-outline { background: rgba(22, 163, 74, 0.15); border: 1px solid var(--green); color: var(--text); font-weight: 600; }
+    .btn-outline:hover { background: var(--green); color: #fff; }
+    .btn-back { background: var(--card); border: 1px solid var(--border); color: var(--text); margin-bottom: 18px; font-weight: 600; }
+    .btn-back:hover { border-color: var(--yellow); color: var(--yellow); background: var(--card-hover); }
 
     /* Cabeçalho da Galeria */
     .gallery-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .gallery-header h2 { font-size: 1.35rem; }
+    .gallery-header h2 { font-size: 1.35rem; border-left: 4px solid var(--yellow); padding-left: 12px; }
 
     /* Grelha de Pastas */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-bottom: 28px; }
@@ -66,9 +74,9 @@
       background: var(--card); padding: 22px; border-radius: 10px; cursor: pointer;
       border: 1px solid var(--border); transition: transform 0.15s, border-color 0.15s, background 0.15s;
     }
-    .card:hover { transform: translateY(-3px); border-color: var(--accent); background: var(--card-hover); }
-    .card h3 { font-size: 1.05rem; margin-bottom: 4px; }
-    .card span { font-size: 0.85rem; color: var(--muted); }
+    .card:hover { transform: translateY(-3px); border-color: var(--yellow); background: var(--card-hover); }
+    .card h3 { font-size: 1.05rem; margin-bottom: 4px; color: var(--text); }
+    .card span { font-size: 0.85rem; color: var(--yellow); font-weight: 500; }
 
     /* Grelha de Fotos */
     .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
@@ -77,13 +85,14 @@
       background: var(--card); cursor: zoom-in; border: 1px solid var(--border);
     }
     .photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s; }
+    .photo:hover { border-color: var(--yellow); }
     .photo:hover img { transform: scale(1.04); }
     .dl {
-      position: absolute; bottom: 10px; right: 10px; background: rgba(15, 17, 21, 0.85);
-      backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.15);
+      position: absolute; bottom: 10px; right: 10px; background: rgba(8, 18, 12, 0.88);
+      color: var(--yellow); backdrop-filter: blur(4px); border: 1px solid rgba(234, 179, 8, 0.4);
       padding: 6px 11px; font-size: 0.8rem; z-index: 2;
     }
-    .dl:hover { background: var(--accent); border-color: var(--accent); }
+    .dl:hover { background: var(--yellow); color: #08120c; border-color: var(--yellow); }
     .status { text-align: center; color: var(--muted); padding: 48px 10px; }
 
     /* Secção de Contactos */
@@ -98,19 +107,19 @@
       padding: 22px; text-align: center; text-decoration: none; color: var(--text);
       transition: border-color 0.15s, transform 0.15s;
     }
-    .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .contact-card strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .contact-card:hover { border-color: var(--yellow); transform: translateY(-2px); }
+    .contact-card strong { display: block; font-size: 1.05rem; margin-bottom: 4px; color: var(--yellow); }
     .contact-card span { color: var(--muted); font-size: 0.95rem; }
 
     footer { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 48px; padding-bottom: 20px; }
 
     /* Lightbox (Imagem em Grande) */
     .lightbox {
-      display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.93);
+      display: none; position: fixed; inset: 0; background: rgba(4, 10, 6, 0.95);
       z-index: 1000; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
     }
     .lightbox.open { display: flex; }
-    .lightbox-img { max-width: 92vw; max-height: 78vh; border-radius: 6px; object-fit: contain; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    .lightbox-img { max-width: 92vw; max-height: 78vh; border-radius: 6px; object-fit: contain; border: 1px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
     .lightbox-bar {
       display: flex; gap: 16px; align-items: center; margin-top: 18px;
     }
@@ -119,13 +128,13 @@
       color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%;
       font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
-    .lb-close:hover { background: rgba(255,255,255,0.25); }
+    .lb-close:hover { background: var(--yellow); color: #08120c; }
     .lb-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
       background: rgba(255,255,255,0.1); color: #fff; border: none;
       width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; cursor: pointer;
     }
-    .lb-nav:hover { background: rgba(255,255,255,0.25); }
+    .lb-nav:hover { background: var(--yellow); color: #08120c; }
     .lb-prev { left: 16px; }
     .lb-next { right: 16px; }
   </style>
@@ -141,9 +150,10 @@
     <nav>
       <div class="brand" onclick="resetHome()">
         <img src="/logo.png" alt="Pires Photography">
+        <span class="club-badge">GALERIA ACA</span>
       </div>
       <div class="nav-links">
-        <a href="#galeria" onclick="resetHome()">Galeria</a>
+        <a href="#galeria" onclick="resetHome()">Jogos</a>
         <a href="#contactos">Contactos</a>
       </div>
     </nav>
@@ -151,18 +161,18 @@
     <!-- Secção de Introdução -->
     <section id="hero" class="hero">
       <img src="/logo.png" alt="Pires Photography" class="hero-logo">
-      <h1>O jogo passa. A emoção fica.</h1>
-      <p>Explora as galerias de cada jornada, revê os melhores momentos em campo e faz o download gratuito das tuas fotografias em alta qualidade.</p>
+      <h1>Galeria Fotográfica — <span>ACA</span></h1>
+      <p>Acompanha todos os jogos, escalões e momentos em campo do ACA. Escolhe a pasta da tua equipa e descarrega as fotografias gratuitamente em alta qualidade.</p>
       <div class="hero-actions">
-        <a href="#galeria" class="btn">📸 Ver Galerias</a>
-        <a href="#contactos" class="btn btn-outline">💬 Pedir Orçamento / Contacto</a>
+        <a href="#galeria" class="btn">📸 Ver Galerias do ACA</a>
+        <a href="#contactos" class="btn btn-outline">💬 Falar com o Fotógrafo</a>
       </div>
     </section>
 
     <!-- Área da Galeria -->
     <main id="galeria">
       <div class="gallery-header">
-        <h2 id="title">📁 Pastas & Jogos</h2>
+        <h2 id="title">Escalões & Jogos ACA</h2>
       </div>
       <button id="back" class="btn btn-back" style="display:none;" onclick="goBack()">← Voltar</button>
       <div id="content">
@@ -172,8 +182,8 @@
 
     <!-- Secção de Contactos -->
     <section id="contactos" class="contact-section">
-      <h2>Entra em Contacto</h2>
-      <p>Queres cobertura fotográfica para o teu clube, torneio ou evento desportivo? Fala comigo.</p>
+      <h2>Contactos — Pires Photography</h2>
+      <p>Tens alguma dúvida sobre as fotos dos jogos ou queres cobertura para algum evento? Entra em contacto.</p>
       <div class="contact-grid">
         <a href="https://instagram.com/_pires.photography" target="_blank" class="contact-card">
           <strong>📷 Instagram</strong>
@@ -187,7 +197,7 @@
     </section>
 
     <footer>
-      © 2026 Pires Photography — Todos os direitos reservados.
+      © 2026 Pires Photography × ACA — Todos os direitos reservados.
     </footer>
   </div>
 
@@ -198,7 +208,7 @@
     <img id="lb-img" class="lightbox-img" src="" alt="">
     <button class="lb-nav lb-next" onclick="changePhoto(1)" title="Seguinte">›</button>
     <div class="lightbox-bar">
-      <span id="lb-counter" style="color: #94a3b8; font-size: 0.9rem;"></span>
+      <span id="lb-counter" style="color: #9eb5a6; font-size: 0.9rem;"></span>
       <a id="lb-download" href="#" class="btn" download>⬇ Download Alta Qualidade</a>
     </div>
   </div>
@@ -212,7 +222,7 @@
     let currentPhotos = [];
     let currentIndex = 0;
 
-    async function loadFolder(folderId = '', folderName = '📁 Pastas & Jogos', isGoingBack = false) {
+    async function loadFolder(folderId = '', folderName = 'Escalões & Jogos ACA', isGoingBack = false) {
       if (!isGoingBack) {
         historyStack.push({ id: folderId, name: folderName });
       }
@@ -246,7 +256,7 @@
           html += `<div class="grid">${folders.map(f => `
             <div class="card" onclick="loadFolder('${f.id}', '${f.name.replace(/'/g, "\'")}')">
               <h3>📁 ${f.name}</h3>
-              <span>Abrir pasta</span>
+              <span>Abrir pasta →</span>
             </div>
           `).join('')}</div>`;
         }
