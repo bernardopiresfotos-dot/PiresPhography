@@ -3,43 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeria de Fotografia</title>
+  <title>Pires Photography — Galeria de Jogos</title>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#0f1115">
-  <link rel="apple-touch-icon" href="https://placehold.co/192x192/3b82f6/ffffff.png?text=FOTOS">
+  <link rel="apple-touch-icon" href="/logo.png">
   <style>
     :root {
       --bg: #0f1115;
       --card: #181b22;
+      --card-hover: #1f242d;
       --text: #f1f5f9;
       --muted: #94a3b8;
       --accent: #3b82f6;
       --accent-hover: #2563eb;
+      --border: #262a34;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 20px; }
-    .container { max-width: 1100px; margin: auto; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #262a34; }
-    header h1 { font-size: 1.4rem; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
+    .container { max-width: 1140px; margin: auto; padding: 20px; }
+
+    /* Barra de Navegação */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 0; margin-bottom: 24px; border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; cursor: pointer; }
+    .brand img { height: 48px; width: auto; object-fit: contain; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 0.95rem; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Secção de Introdução (Hero) */
+    .hero {
+      background: linear-gradient(145deg, #181b22 0%, #111318 100%);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 40px 28px; margin-bottom: 36px; text-align: center;
+    }
+    .hero-logo { max-width: 240px; height: auto; margin: 0 auto 20px auto; display: block; }
+    .hero h1 { font-size: 1.85rem; margin-bottom: 12px; letter-spacing: -0.5px; }
+    .hero p { color: var(--muted); max-width: 620px; margin: 0 auto 24px auto; font-size: 1.05rem; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* Botões */
     .btn {
-      background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 8px;
-      text-decoration: none; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500; display: inline-block;
+      background: var(--accent); color: #fff; padding: 10px 18px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer; font-size: 0.92rem; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s;
     }
     .btn:hover { background: var(--accent-hover); }
-    .btn-back { background: #262a34; margin-bottom: 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: var(--card-hover); }
+    .btn-back { background: var(--border); margin-bottom: 18px; }
+
+    /* Cabeçalho da Galeria */
+    .gallery-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .gallery-header h2 { font-size: 1.35rem; }
+
+    /* Grelha de Pastas */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-bottom: 28px; }
     .card {
       background: var(--card); padding: 22px; border-radius: 10px; cursor: pointer;
-      border: 1px solid #262a34; transition: transform 0.15s, border-color 0.15s;
+      border: 1px solid var(--border); transition: transform 0.15s, border-color 0.15s, background 0.15s;
     }
-    .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .card:hover { transform: translateY(-3px); border-color: var(--accent); background: var(--card-hover); }
     .card h3 { font-size: 1.05rem; margin-bottom: 4px; }
     .card span { font-size: 0.85rem; color: var(--muted); }
-    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-    .photo { position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; background: var(--card); }
-    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .dl { position: absolute; bottom: 10px; right: 10px; background: rgba(59, 130, 246, 0.92); padding: 7px 12px; font-size: 0.8rem; }
-    .status { text-align: center; color: var(--muted); padding: 40px 10px; }
+
+    /* Grelha de Fotos */
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+    .photo {
+      position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden;
+      background: var(--card); cursor: zoom-in; border: 1px solid var(--border);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s; }
+    .photo:hover img { transform: scale(1.04); }
+    .dl {
+      position: absolute; bottom: 10px; right: 10px; background: rgba(15, 17, 21, 0.85);
+      backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 11px; font-size: 0.8rem; z-index: 2;
+    }
+    .dl:hover { background: var(--accent); border-color: var(--accent); }
+    .status { text-align: center; color: var(--muted); padding: 48px 10px; }
+
+    /* Secção de Contactos */
+    .contact-section {
+      margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border);
+    }
+    .contact-section h2 { font-size: 1.4rem; margin-bottom: 8px; text-align: center; }
+    .contact-section > p { color: var(--muted); text-align: center; margin-bottom: 28px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 680px; margin: auto; }
+    .contact-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 22px; text-align: center; text-decoration: none; color: var(--text);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .contact-card strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .contact-card span { color: var(--muted); font-size: 0.95rem; }
+
+    footer { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 48px; padding-bottom: 20px; }
+
+    /* Lightbox (Imagem em Grande) */
+    .lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.93);
+      z-index: 1000; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img { max-width: 92vw; max-height: 78vh; border-radius: 6px; object-fit: contain; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    .lightbox-bar {
+      display: flex; gap: 16px; align-items: center; margin-top: 18px;
+    }
+    .lb-close {
+      position: absolute; top: 20px; right: 24px; background: rgba(255,255,255,0.1);
+      color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%;
+      font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.25); }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); color: #fff; border: none;
+      width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; cursor: pointer;
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.25); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
   </style>
   <script>
     if ('serviceWorker' in navigator) {
@@ -49,12 +137,69 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1 id="title">📸 Galeria de Jogos</h1>
-    </header>
-    <button id="back" class="btn btn-back" style="display:none;" onclick="goBack()">← Voltar</button>
-    <div id="content">
-      <p class="status">A carregar...</p>
+    <!-- Navegação -->
+    <nav>
+      <div class="brand" onclick="resetHome()">
+        <img src="/logo.png" alt="Pires Photography">
+      </div>
+      <div class="nav-links">
+        <a href="#galeria" onclick="resetHome()">Galeria</a>
+        <a href="#contactos">Contactos</a>
+      </div>
+    </nav>
+
+    <!-- Secção de Introdução -->
+    <section id="hero" class="hero">
+      <img src="/logo.png" alt="Pires Photography" class="hero-logo">
+      <h1>O jogo passa. A emoção fica.</h1>
+      <p>Explora as galerias de cada jornada, revê os melhores momentos em campo e faz o download gratuito das tuas fotografias em alta qualidade.</p>
+      <div class="hero-actions">
+        <a href="#galeria" class="btn">📸 Ver Galerias</a>
+        <a href="#contactos" class="btn btn-outline">💬 Pedir Orçamento / Contacto</a>
+      </div>
+    </section>
+
+    <!-- Área da Galeria -->
+    <main id="galeria">
+      <div class="gallery-header">
+        <h2 id="title">📁 Pastas & Jogos</h2>
+      </div>
+      <button id="back" class="btn btn-back" style="display:none;" onclick="goBack()">← Voltar</button>
+      <div id="content">
+        <p class="status">A carregar...</p>
+      </div>
+    </main>
+
+    <!-- Secção de Contactos -->
+    <section id="contactos" class="contact-section">
+      <h2>Entra em Contacto</h2>
+      <p>Queres cobertura fotográfica para o teu clube, torneio ou evento desportivo? Fala comigo.</p>
+      <div class="contact-grid">
+        <a href="https://instagram.com/_pires.photography" target="_blank" class="contact-card">
+          <strong>📷 Instagram</strong>
+          <span>@_pires.photography</span>
+        </a>
+        <a href="https://wa.me/351928057713" target="_blank" class="contact-card">
+          <strong>💬 WhatsApp</strong>
+          <span>+351 928 057 713</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Pires Photography — Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- Visualizador em Grande (Lightbox) -->
+  <div id="lightbox" class="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lb-close" onclick="closeLightbox()" title="Fechar">✕</button>
+    <button class="lb-nav lb-prev" onclick="changePhoto(-1)" title="Anterior">‹</button>
+    <img id="lb-img" class="lightbox-img" src="" alt="">
+    <button class="lb-nav lb-next" onclick="changePhoto(1)" title="Seguinte">›</button>
+    <div class="lightbox-bar">
+      <span id="lb-counter" style="color: #94a3b8; font-size: 0.9rem;"></span>
+      <a id="lb-download" href="#" class="btn" download>⬇ Download Alta Qualidade</a>
     </div>
   </div>
 
@@ -62,15 +207,20 @@
     const content = document.getElementById('content');
     const title = document.getElementById('title');
     const back = document.getElementById('back');
+    const hero = document.getElementById('hero');
     let historyStack = [];
+    let currentPhotos = [];
+    let currentIndex = 0;
 
-    async function loadFolder(folderId = '', folderName = '📸 Galeria de Jogos', isGoingBack = false) {
+    async function loadFolder(folderId = '', folderName = '📁 Pastas & Jogos', isGoingBack = false) {
       if (!isGoingBack) {
         historyStack.push({ id: folderId, name: folderName });
       }
 
+      const isRoot = historyStack.length <= 1;
+      hero.style.display = isRoot ? 'block' : 'none';
       title.textContent = folderName;
-      back.style.display = historyStack.length > 1 ? 'inline-block' : 'none';
+      back.style.display = isRoot ? 'none' : 'inline-flex';
       content.innerHTML = '<p class="status">A carregar...</p>';
 
       try {
@@ -89,7 +239,7 @@
         }
 
         const folders = items.filter(i => i.isFolder);
-        const photos = items.filter(i => !i.isFolder);
+        currentPhotos = items.filter(i => !i.isFolder);
         let html = '';
 
         if (folders.length) {
@@ -101,11 +251,11 @@
           `).join('')}</div>`;
         }
 
-        if (photos.length) {
-          html += `<div class="photo-grid">${photos.map(p => `
-            <div class="photo">
+        if (currentPhotos.length) {
+          html += `<div class="photo-grid">${currentPhotos.map((p, idx) => `
+            <div class="photo" onclick="openLightbox(${idx})">
               <img src="${p.preview}" loading="lazy" alt="${p.name}">
-              <a href="${p.download}" class="btn dl" download>⬇ Download</a>
+              <a href="${p.download}" class="btn dl" onclick="event.stopPropagation()" download>⬇ Download</a>
             </div>
           `).join('')}</div>`;
         }
@@ -123,6 +273,48 @@
         loadFolder(prev.id, prev.name, true);
       }
     }
+
+    function resetHome() {
+      historyStack = [];
+      loadFolder();
+    }
+
+    /* Funções do Lightbox (Imagem em Grande) */
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnBg(e) {
+      if (e.target.id === 'lightbox') closeLightbox();
+    }
+
+    function changePhoto(step) {
+      currentIndex = (currentIndex + step + currentPhotos.length) % currentPhotos.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const photo = currentPhotos[currentIndex];
+      const highResPreview = photo.preview.replace('=s800', '=s1600');
+      document.getElementById('lb-img').src = highResPreview;
+      document.getElementById('lb-download').href = photo.download;
+      document.getElementById('lb-counter').textContent = `${currentIndex + 1} / ${currentPhotos.length}`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') changePhoto(1);
+      if (e.key === 'ArrowLeft') changePhoto(-1);
+    });
 
     loadFolder();
   </script>

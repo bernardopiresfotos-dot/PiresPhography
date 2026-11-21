@@ -10,7 +10,6 @@ exports.handler = async (event) => {
     };
   }
 
-  // Procura tanto subpastas como imagens dentro da pasta atual
   const query = `'${folderId}' in parents and (mimeType = 'application/vnd.google-apps.folder' or mimeType contains 'image/') and trashed = false`;
   const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(query)}&fields=files(id,name,mimeType,thumbnailLink)&orderBy=folder,name desc&pageSize=1000&key=${apiKey}`;
 
