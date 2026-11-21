@@ -1,0 +1,20 @@
+{
+  "name": "Galeria de Jogos - Fotografia",
+  "short_name": "Fotos Jogos",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f1115",
+  "theme_color": "#0f1115",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/3b82f6/ffffff.png?text=FOTOS",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://placehold.co/512x512/3b82f6/ffffff.png?text=FOTOS",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
